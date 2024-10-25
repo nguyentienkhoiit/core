@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: App
+  profiles:
+    active: @spring.profile.active@
+server:
+  port: 80

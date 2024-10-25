@@ -1,0 +1,11 @@
+mvn clean package: build default environment
+
+mvn clean package -P dev: build dev profile environment
+
+docker build -t api-image-sample .: build docker image
+
+docker run -it -p 80:80 --name=api-container api-image-sample: build container from image
+
+docker compose down -v: xóa các container bởi docker compose
+
+docker-compose logs -tf api-service: xem log container

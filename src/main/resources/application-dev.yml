@@ -1,0 +1,13 @@
+#server:
+#  port: 8080
+spring:
+  config:
+    activate:
+      on-profile: dev
+open:
+  api:
+    description: API services document description
+    title: ${API_TITLE:DUMMY-API-TITLE}
+    version: 1.0.0
+    server: http://localhost:${server.port}
+    serverName: Server Test
