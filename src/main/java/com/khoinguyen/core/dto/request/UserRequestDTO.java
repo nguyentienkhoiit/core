@@ -1,5 +1,6 @@
 package com.khoinguyen.core.dto.request;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.khoinguyen.core.dto.validator.EnumPattern;
 import com.khoinguyen.core.dto.validator.EnumValue;
 import com.khoinguyen.core.dto.validator.GenderSubset;
@@ -13,7 +14,10 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.Builder;
 import lombok.Getter;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serializable;
+import java.util.Date;
 import java.util.Set;
 
 import static com.khoinguyen.core.util.Gender.*;
@@ -37,8 +41,9 @@ public class UserRequestDTO {
     private String phone;
 
     @NotNull(message = "dateOfBirth must be not null")
-//    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy", timezone = "Asia/Ho_Chi_Minh")
-    private String dateOfBirth;
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
+    @JsonFormat(pattern = "MM/dd/yyyy")
+    private Date dateOfBirth;
 
     //@Pattern(regexp = "^male|female|other$", message = "gender must be one in {male, female, other}")
     @GenderSubset(anyOf = {MALE, FEMALE, OTHER})
@@ -55,7 +60,7 @@ public class UserRequestDTO {
     private String type;
 
     @NotEmpty(message = "addresses can not empty")
-    private Set<AddressRequestDto> addresses;
+    private Set<AddressDTO> addresses;
 
     @EnumPattern(name = "status", regexp = "ACTIVE|INACTIVE|NONE")
     private UserStatus status;
